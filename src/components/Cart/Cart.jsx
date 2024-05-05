@@ -8,8 +8,8 @@ import Checkout from "./Checkout";
 import useHttp from "../../hooks/use-http";
 
 const Cart = (props) => {
-  const [expanded, setExpanded] = useState(false);
   const cartCtx = useContext(CartContext);
+  const [expanded, setExpanded] = useState(false);
   const [submittedSuccessfully, setSubmittedSuccessfully] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { sendRequest } = useHttp();
