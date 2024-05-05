@@ -12,7 +12,7 @@ const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const [submittedSuccessfully, setSubmittedSuccessfully] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isLoading, sendRequest } = useHttp();
+  const { sendRequest } = useHttp();
   const sendRequestHandler = async (userData) => {
     setIsSubmitting(true);
     await sendRequest(
@@ -31,6 +31,7 @@ const Cart = (props) => {
         if (data.name !== null) {
           setIsSubmitting(false);
           setSubmittedSuccessfully(true);
+          cartCtx.resetCart();
         }
       }
     );
@@ -87,11 +88,7 @@ const Cart = (props) => {
             <span>${cartCtx.totalAmount.toFixed(2)}</span>
           </div>
           {expanded && (
-            <Checkout
-              onCancel={props.onClick}
-              onConfirm={sendRequestHandler}
-              isLoading={isLoading}
-            />
+            <Checkout onCancel={props.onClick} onConfirm={sendRequestHandler} />
           )}
           {!expanded && (
             <div className={classes.actions}>

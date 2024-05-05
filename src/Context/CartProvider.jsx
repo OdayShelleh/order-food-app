@@ -4,7 +4,6 @@ import CartContext from "./cart-context";
 const defaultCartState = {
   items: [],
   totalAmount: 0,
-  isShown: 0,
 };
 
 const cartReducer = (state, action) => {
@@ -53,6 +52,11 @@ const cartReducer = (state, action) => {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
     };
+  } else if (action.type === "RESET") {
+    return {
+      items: [],
+      totalAmount: 0,
+    };
   }
   return defaultCartState;
 };
@@ -71,6 +75,9 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
 
+  const resetHandler = () => {
+    dispatchCartAction({ type: "RESET" });
+  };
   return (
     <CartContext.Provider
       value={{
@@ -78,6 +85,7 @@ const CartProvider = (props) => {
         totalAmount: cartState.totalAmount,
         addItem: addItemHandler,
         removeItem: removeItemHandler,
+        resetCart: resetHandler,
       }}
     >
       {props.children}

@@ -22,7 +22,7 @@ const Checkout = (props) => {
       <div className={classes.actions}>
         <button onClick={props.onCancel}>Cancle</button>
         <button className={cc} type="submit">
-          {props.isLoading ? "sending..." : "Confirm"}
+          Confirm
         </button>
       </div>
     </form>
